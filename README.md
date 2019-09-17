@@ -1,5 +1,5 @@
 # Authors:
-Edward Kats &  Dimitry Sosnovsky
+Edward Kats &  Dimitry Sosnovsky (https://github.com/strasvet)
 
 # Features:
 - swagger @ApiModelProperty upgrade config.
