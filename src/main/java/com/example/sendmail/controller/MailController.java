@@ -1,30 +1,35 @@
-package com.example.sendmail.controller;/*
-  Author DSR Sosnovsky 
-  September 
-*/
+package com.example.sendmail.controller;
 
+
+import com.example.sendmail.dto.HtmlMailRequest;
+import com.example.sendmail.dto.HtmlMailRequestWithAttachment;
+import com.example.sendmail.dto.SimpleMailRequest;
 import com.example.sendmail.service.ServiceSendMail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/mail")
 public class MailController {
 
     @Autowired
     private ServiceSendMail serviceSendMail;
 
-    @GetMapping(value = "/mail", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getMail() {
-        return serviceSendMail.sendMail("null", "test hello from java spring", "Testik");
+    @PostMapping(value = "/")
+    public SimpleMailRequest sendSimpleMail(@RequestBody SimpleMailRequest simpleMailRequest) {
+        return serviceSendMail.sendMail(simpleMailRequest);
     }
 
-    @GetMapping(value = "/mail2", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getMailCustom() {
-        return serviceSendMail.sendCustomMail("cool-team@bestcaffe.club", "test hello from java spring", "Testik");
+    @PostMapping(value = "/with-html")
+    public HtmlMailRequest sendHtmlMail(@RequestBody HtmlMailRequest htmlMailRequest) {
+        return serviceSendMail.sendEmailWithHTML(htmlMailRequest);
     }
 
+    @PostMapping("/with-html-and-attachment")
+    public HtmlMailRequestWithAttachment sendHtmlMailWithAttachment(@RequestBody HtmlMailRequestWithAttachment htmlMailRequest) {
+        return serviceSendMail.sendEmailWithHTMLAndAttachment(htmlMailRequest);
+    }
 }

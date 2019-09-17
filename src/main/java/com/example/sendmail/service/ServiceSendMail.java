@@ -1,9 +1,11 @@
-package com.example.sendmail.service;/*
-  Author DSR Sosnovsky 
-  September 
-*/
+package com.example.sendmail.service;
+
+import com.example.sendmail.dto.HtmlMailRequest;
+import com.example.sendmail.dto.HtmlMailRequestWithAttachment;
+import com.example.sendmail.dto.SimpleMailRequest;
 
 public interface ServiceSendMail {
-    String sendMail(String sendTo, String subject, String message);
-    String sendCustomMail(String sendTo, String subject, String message);
+    SimpleMailRequest sendMail(SimpleMailRequest simpleMailRequest);
+    HtmlMailRequest sendEmailWithHTML(HtmlMailRequest htmlMailRequest);
+    HtmlMailRequestWithAttachment sendEmailWithHTMLAndAttachment(HtmlMailRequestWithAttachment htmlMailRequest);
 }
